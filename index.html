@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример POST запроса</title>
+</head>
+<body>
+
+<button id="myButton">Buy</button>
+
+<script>
+    const button = document.getElementById('myButton');
+
+    button.addEventListener('click', async () => {
+      try {
+        const response = await fetch('http://localhost:8080/invoices', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: 'Привет, сервер!' }) // данные для отправки
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Ответ сервера:', data);
+          button.textContent = 'Успешно отправлено!';
+          button.disabled = true;
+        } else {
+          console.error('Ошибка при отправке:', response.status);
+        }
+      } catch (error) {
+        console.error('Ошибка сети:', error);
+      }
+    });
+</script>
+
+</body>
+</html>
