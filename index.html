@@ -8,19 +8,21 @@
 </head>
 <body>
 
-<button id="myButton">Buy</button>
+<h2>Создать инвойс</h2>
+<button id="createInvoiceBtn">Создать</button>
 
 <script>
-  const button = document.getElementById('myButton');
+const tg = window.Telegram.WebApp;
 
-  button.addEventListener('click', () => {
+document.getElementById("createInvoiceBtn").addEventListener("click", () => {
     const event = {
-      type: "invoice_created",
-      invoiceId: 123,
-      amount: 500
+        type: "create_invoice",
+        invoiceId: Math.floor(Math.random() * 1000),
+        amount: 5000
     };
-    window.Telegram.WebApp.sendData(JSON.stringify(event));
-  });
+    tg.sendData(JSON.stringify(event)); // отправляем данные боту
+    alert("Данные отправлены боту");
+});
 </script>
 
 </body>
