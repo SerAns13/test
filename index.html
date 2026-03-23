@@ -20,8 +20,8 @@ document.getElementById("createInvoiceBtn").addEventListener("click", () => {
         invoiceId: Math.floor(Math.random() * 1000),
         amount: 5000
     };
-    tg.sendData(JSON.stringify(event)); // отправляем данные боту
-    alert("Данные отправлены боту");
+    tg.openInvoice('https://t.me/$2qLZE6AUCUrsFAAAsIA9fN9of-E', () => {alert("Данные отправлены боту");})
+    
 });
 </script>
 
