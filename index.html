@@ -14,26 +14,12 @@
   const button = document.getElementById('myButton');
 
   button.addEventListener('click', () => {
-    fetch('http://localhost:8080/invoices', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name: 1 })
-    })
-    .then(response => {
-      if (!response.ok) throw new Error(`Статус ошибки: ${response.status}`);
-      return response.json();
-    })
-    .then(data => {
-      console.log('Ответ сервера:', data);
-      button.textContent = 'Успешно отправлено!';
-      button.disabled = true; // блокируем кнопку после успешного запроса
-    })
-    .catch(error => {
-      console.error('Ошибка:', error);
-      alert('Произошла ошибка при отправке запроса.');
-    });
+    const event = {
+      type: "invoice_created",
+      invoiceId: 123,
+      amount: 500
+    };
+    window.Telegram.WebApp.sendData(JSON.stringify(event));
   });
 </script>
 
